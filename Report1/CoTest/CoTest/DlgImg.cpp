@@ -96,6 +96,10 @@ void CDlgImg::UpdateInitCircle()
 		m_Image.Destroy();
 		initImage();
 	}
+	else if(m_Image == NULL)
+	{
+		initImage();
+	}
 	srand((unsigned int)time(NULL));
 	_nRadius = ((rand()%40)+5);
 	CClientDC dc(this);
@@ -112,6 +116,10 @@ void CDlgImg::UpdateCircle()
 	if(m_Image != NULL)
 	{
 		m_Image.Destroy();
+		initImage();
+	}
+	else if(m_Image == NULL)
+	{
 		initImage();
 	}
 
@@ -361,16 +369,45 @@ void CDlgImg::drawPen(int centerX, int centerY)
 {
 	CRect rect;
 	CPen pen;
+	CPoint xPoint(centerX, centerY);
+	/*CPoint xPoint2(centerX+10, centerY-10);*/
 
 	pen.CreatePen(PS_SOLID, 1, RGB(0x50,0,0));
 	
 	CString csTemp;
 	csTemp.Format(_T("%3d, %3d"), centerX, centerY);
-	CDC* cDC;
-	cDC = CDC::FromHandle(m_Image.GetDC());
-	CPen* pOldPen = cDC->SelectObject(&pen);
-	cDC->TextOut(centerX,centerY,csTemp);
-	cDC->SelectObject(pOldPen);
+	CDC* pDC;
+	pDC = CDC::FromHandle(m_Image.GetDC());
+	CPen* pOldPen = pDC->SelectObject(&pen);
+	pDC->TextOut(centerX,centerY+20,csTemp);
+	pDC->SelectObject(pOldPen);
+
+	//point1
+	xPoint.x = centerX -10;
+	xPoint.y = centerY + 10;
+	pDC->MoveTo(xPoint);
+
+	//point2
+	xPoint.x = centerX +10;
+	xPoint.y = centerY - 10;
+	pDC->LineTo(xPoint);
+
+	xPoint.x = centerX;
+	xPoint.y = centerY;
+	pDC->MoveTo(xPoint);
+
+	//point3
+	xPoint.x = centerX +10;
+	xPoint.y = centerY + 10;
+	pDC->LineTo(xPoint);
+
+	//point4
+	xPoint.x = centerX - 10;
+	xPoint.y = centerY - 10;
+	pDC->LineTo(xPoint);
+
+
+
 
 	CClientDC dc(this);
 	m_Image.Draw(dc,0,0);
@@ -378,7 +415,7 @@ void CDlgImg::drawPen(int centerX, int centerY)
 	pen.DeleteObject();
 
 	m_Image.ReleaseDC();
-	ReleaseDC(cDC);
+	ReleaseDC(pDC);
 
 
 }
