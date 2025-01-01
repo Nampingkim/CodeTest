@@ -1,4 +1,5 @@
 *.tlog
+*.log
 /*.ipch/
-/*.Debug/
+/Debug/
 *.sdf
