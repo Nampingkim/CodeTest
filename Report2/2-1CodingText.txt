@@ -1,0 +1,22 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int solution(int n, int k) {
+    int answer = 0;
+    int nLamb = 0;
+    int nCoke = 0;
+    if((n>0) && (n<1000))
+    {
+        nLamb = n * 12000;
+    }
+    
+    if((k>=(n/10)) && (k<1000))
+    {
+        nCoke = (k-(n/10)) * 2000;
+    }
+    
+    answer = nLamb + nCoke;
+    return answer;
+}
