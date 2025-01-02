@@ -1,0 +1,25 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int solution(int a, int b) {
+    int answer = 0;
+    string csTemp1,csTemp2,csAnswer;
+    int answer_a, answer_b = 0;
+    csTemp1 = to_string(a);
+    csTemp2 = to_string(b);
+    csAnswer = csTemp1+csTemp2;
+    answer_a = stoi(csAnswer);
+    csAnswer = csTemp2+csTemp1;
+    answer_b = stoi(csAnswer);
+    
+    if(answer_a>answer_b)
+        answer = answer_a;
+    else if(answer_b > answer_a)
+        answer = answer_b;
+    else if(answer_a == answer_b)
+        answer = answer_a;
+        
+    return answer;
+}

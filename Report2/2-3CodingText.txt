@@ -1,0 +1,24 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int solution(vector<int> ingredient) {
+    int answer = 0;
+        vector<int> vBurger = { 0 };
+    for(int x : ingredient)
+    {
+        if(vBurger.back() == 1 && x == 2) 
+            vBurger.back() = 12;
+        else if(vBurger.back() == 12 && x == 3) 
+            vBurger.back() = 123;
+        else if(vBurger.back() == 123 && x == 1)
+        {
+            answer++;
+            vBurger.pop_back();
+        }
+        else 
+            vBurger.push_back(x);
+    }
+    return answer;
+}

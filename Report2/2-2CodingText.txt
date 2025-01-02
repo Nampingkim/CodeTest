@@ -1,0 +1,38 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int solution(string my_string, string is_prefix) {
+    int answer = 0;
+    int nLength1 = 0;    
+    int nLength2 = 0;    
+    bool bFlag = false;
+    nLength1 = is_prefix.length();
+    nLength2 = my_string.length();
+    for(int i = 0; i < nLength1; i++)
+    {
+        if(my_string[i] == is_prefix[i])
+        {
+            bFlag = true;
+        }
+        else
+        {
+            bFlag = false;
+             break;
+        }   
+    }
+    
+    if(bFlag)
+        answer = 1;
+    
+    if(nLength1 > nLength2)
+        answer = 0;
+    
+    if((nLength1<1) && (nLength1 >100))
+        answer = 0;
+    else if((nLength2<1) && (nLength2 >100))
+        answer = 0;
+              
+    return answer;
+}
